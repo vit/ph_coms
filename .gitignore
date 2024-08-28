@@ -2,5 +2,9 @@
 config.php
 papers
 
-admin/conf.php
+# admin/conf.php
+
+*.sql
+
+
 

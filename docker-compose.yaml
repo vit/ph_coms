@@ -1,0 +1,58 @@
+
+services:
+
+  web-php-coms:
+    image: nginx:latest
+    restart: always
+    expose:
+      - "80"
+    volumes:
+      - ../data/coms:/var/www/html
+      - ./web-coms/default.conf:/etc/nginx/conf.d/default.conf
+      - ./web-coms/.htpasswd-coms:/etc/nginx/.htpasswd-coms
+    environment:
+      VIRTUAL_HOST:
+        coms.physcon.my, coms.physcon.ru,
+    networks:
+      - frontend
+      - phpfpm-coms
+    links:
+      - php-fpm-coms
+
+  php-fpm-coms:
+    restart: always
+    build: 
+      context: ./php-fpm-coms
+      dockerfile: Dockerfile_PhpFpm
+    expose:
+      - "9000"
+    volumes:
+      - ./app:/var/www/html
+    user: "www-data:www-data"
+    networks:
+      - phpfpm-coms
+      - pg
+
+  postgres:
+    restart: always
+    build: 
+      context: ./pg
+      dockerfile: Dockerfile_Pg
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+    expose:
+      - "5432"
+    # volumes:
+    #   - ./logs:/logs
+    networks:
+      - pg
+
+networks:
+  frontend:
+    external: true 
+    name: frontend 
+  phpfpm-coms:
+  pg:
+
+ 
