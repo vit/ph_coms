@@ -7,7 +7,7 @@ services:
     expose:
       - "80"
     volumes:
-      - ../data/coms:/var/www/html
+      - ./app:/var/www/html
       - ./web-coms/default.conf:/etc/nginx/conf.d/default.conf
       - ./web-coms/.htpasswd-coms:/etc/nginx/.htpasswd-coms
     environment:
