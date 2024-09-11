@@ -1,5 +1,4 @@
 
-
 <?php function render_login() { ?>
 <?
 
@@ -57,9 +56,11 @@ Password:
 
 <?php function render_top_menu_block() { ?>
     <?php
+        $COMS_DOMAIN_NAME = $_SERVER["COMS_DOMAIN_NAME"];
+
         $ipacs_menu = [
             ['id' => "ipacs", 'name' => "IPACS Home", 'url' => "http://physcon.my"],
-            ['id' => "coms", 'name' => "CoMS", 'url' => "http://coms.physcon.my"],
+            ['id' => "coms", 'name' => "CoMS", 'url' => "http://$COMS_DOMAIN_NAME"],
             ['id' => "cap", 'name' => "CAP Journal", 'url' => "http://cap.physcon.my"],
             ['id' => "lib", 'name' => "Library", 'url' => "http://lib.physcon.my"],
             ['id' => "conferences", 'name' => "Conferences", 'url' => "http://conf.physcon.my"],

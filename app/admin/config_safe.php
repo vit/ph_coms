@@ -1,6 +1,6 @@
 <?php
 
-// Rename this config_safe.php to conf.php and add password
+// Rename this config_safe.php to config.php and add a password
 
 $DN="db00060892";
 $HN="postgres";

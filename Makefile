@@ -1,4 +1,6 @@
 
+COMS_DOMAIN_NAME=coms.physcon.my
+
 ##
 ##
 ##
@@ -18,5 +20,13 @@ down:	## Stop docker compose
 
 ps:	## List docker compose containers
 	docker compose ps
+
+
+
+
+build_web:
+	cat web-coms/default-template.conf \
+		| envsubst '$$COMS_DOMAIN_NAME' \
+		> web-coms/default.conf
 
 
