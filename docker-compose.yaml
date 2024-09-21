@@ -4,6 +4,7 @@ services:
   web-php-coms:
     image: nginx:latest
     restart: always
+    container_name: ph_coms_web_${ENV_NAME}
     expose:
       - "80"
     volumes:
@@ -12,7 +13,9 @@ services:
       - ./web-coms/.htpasswd-coms:/etc/nginx/.htpasswd-coms
     environment:
       VIRTUAL_HOST:
-        coms.physcon.my, coms.physcon.ru,
+        ${COMS_DOMAIN_NAME},
+      # VIRTUAL_HOST:
+      #   coms.physcon.my, coms.physcon.ru,
     networks:
       - frontend
       - phpfpm-coms
@@ -21,6 +24,7 @@ services:
 
   php-fpm-coms:
     restart: always
+    container_name: ph_coms_php_${ENV_NAME}
     build: 
       context: ./php-fpm-coms
       dockerfile: Dockerfile_PhpFpm
@@ -35,6 +39,7 @@ services:
 
   postgres:
     restart: always
+    container_name: ph_coms_pg_${ENV_NAME}
     build: 
       context: ./pg
       dockerfile: Dockerfile_Pg

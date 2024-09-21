@@ -56,15 +56,20 @@ Password:
 
 <?php function render_top_menu_block() { ?>
     <?php
+        $IPACS_DOMAIN_NAME = $_SERVER["IPACS_DOMAIN_NAME"];
         $COMS_DOMAIN_NAME = $_SERVER["COMS_DOMAIN_NAME"];
+        $CAP_DOMAIN_NAME = $_SERVER["CAP_DOMAIN_NAME"];
+        $LIB_DOMAIN_NAME = $_SERVER["LIB_DOMAIN_NAME"];
+        $CONF_DOMAIN_NAME = $_SERVER["CONF_DOMAIN_NAME"];
+        $ALBUM_DOMAIN_NAME = $_SERVER["ALBUM_DOMAIN_NAME"];
 
         $ipacs_menu = [
-            ['id' => "ipacs", 'name' => "IPACS Home", 'url' => "http://physcon.my"],
+            ['id' => "ipacs", 'name' => "IPACS Home", 'url' => "http://$IPACS_DOMAIN_NAME"],
             ['id' => "coms", 'name' => "CoMS", 'url' => "http://$COMS_DOMAIN_NAME"],
-            ['id' => "cap", 'name' => "CAP Journal", 'url' => "http://cap.physcon.my"],
-            ['id' => "lib", 'name' => "Library", 'url' => "http://lib.physcon.my"],
-            ['id' => "conferences", 'name' => "Conferences", 'url' => "http://conf.physcon.my"],
-            ['id' => "album", 'name' => "Album", 'url' => "http://album.physcon.my"]
+            ['id' => "cap", 'name' => "CAP Journal", 'url' => "http://$CAP_DOMAIN_NAME"],
+            ['id' => "lib", 'name' => "Library", 'url' => "http://$LIB_DOMAIN_NAME"],
+            ['id' => "conferences", 'name' => "Conferences", 'url' => "http://$CONF_DOMAIN_NAME"],
+            ['id' => "album", 'name' => "Album", 'url' => "http://$ALBUM_DOMAIN_NAME"]
         ];
     ?>
 
