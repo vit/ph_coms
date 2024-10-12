@@ -1,4 +1,6 @@
 
+name: ph_coms_${ENV_NAME}
+
 services:
 
   web-php-coms:
