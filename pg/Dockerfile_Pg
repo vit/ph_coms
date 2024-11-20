@@ -7,7 +7,7 @@ RUN localedef -i ru_RU -c -f CP1251 -A /usr/share/locale/locale.alias ru_RU.CP12
 # ADD ./pg/pg_20240426.sql /docker-entrypoint-initdb.d/
 # COPY ./pg_20240426.sql /docker-entrypoint-initdb.d/
 COPY ./pg_20240426_fixed.sql /docker-entrypoint-initdb.d/
-
+COPY ./z_400_update.sql /docker-entrypoint-initdb.d/
 
 # CMD ["postgres", "-c", "logging_collector=on", "-c", "log_directory=/logs", "-c", "log_filename=postgresql.log", "-c", "log_statement=all"]
 

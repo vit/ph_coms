@@ -4,7 +4,7 @@ papers
 
 # admin/conf.php
 
-*.sql
+pg_*.sql
 
 .env
 

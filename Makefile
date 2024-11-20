@@ -22,6 +22,9 @@ stop: down
 
 
 
+build:
+	docker compose build postgres
+
 debug:	## Start docker compose with debug output
 	docker compose up
 

@@ -16,11 +16,12 @@ PAGEBODY;
   $email = trim( $_REQUEST['email'] );
 //  $manager = trim( $_REQUEST['manager'] );
   $description = trim( $_REQUEST['description'] );
+  $review_deadline = trim( $_REQUEST['review_deadline'] );
   $status = trim( $_REQUEST['status'] );
 
 
   if ( $contextflag=="save" && $title ) {
-    @$result = pg_query("UPDATE context SET title='$title', shorttitle='$shorttitle', description='$description', homepage='$homepage', email='$email', status='$status' WHERE contid='$CURRENTCONT'");
+    @$result = pg_query("UPDATE context SET title='$title', shorttitle='$shorttitle', description='$description', homepage='$homepage', email='$email', review_deadline='$review_deadline', status='$status' WHERE contid='$CURRENTCONT'");
   }
 
 
@@ -34,6 +35,8 @@ if( $row = pg_fetch_array($result) ) {
   $cemail1 = htmlspecialchars($row['email']);
 //  $cdescr1 = nl2br( htmlspecialchars($row['description']) );
   $cdescr1 = htmlspecialchars($row['description']);
+
+  $creview_deadline1 = htmlspecialchars($row['review_deadline']);
 
   $cstatus = "<select name=status>";
   foreach($CONTSTATUS as $key => $val) {
@@ -70,6 +73,9 @@ if( $row = pg_fetch_array($result) ) {
 </tr>
 <tr>
   <td align=right valign=top>Description:</td><td><textarea name="description" cols=60 rows=5>$cdescr1</textarea></td>
+</tr>
+<tr>
+  <td align=right>Review deadline:</td><td><input type=text name="review_deadline" size=60 value="$creview_deadline1"></td>
 </tr>
 <tr>
   <td align=right>Status:</td><td>$cstatus</td>
