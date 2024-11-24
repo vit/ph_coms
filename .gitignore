@@ -1,10 +1,14 @@
 
 config.php
-papers
+app/coms/papers
 
 # admin/conf.php
 
-pg_*.sql
+# pg_*.sql
+
+pg/init/01_create
+data/pg
+
 
 .env
 

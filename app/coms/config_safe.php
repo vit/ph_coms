@@ -24,9 +24,8 @@ $ROOT = "/";
 $papersdir = "papers";
 
 
-$COOKIEDOMAIN = ".physcon.my";
-// $COOKIEDOMAIN = ".physcon.ru";
-#  $COOKIEDOMAIN = "coms.physcon.evarist.ru";
+$COMS_DOMAIN_NAME = $_SERVER["COMS_DOMAIN_NAME"];
+$COOKIEDOMAIN = ".$COMS_DOMAIN_NAME";
 
 
 	//  $FROMEMAIL = "cap@physcon.ru";

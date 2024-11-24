@@ -7,11 +7,17 @@ RUN apt-get install -y libpq-dev \
   && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
   && docker-php-ext-install pdo pdo_pgsql pgsql
 
+# Install sendmail
+# RUN apt-get install -y sendmail
+
+# And clean up the image
+RUN rm -rf /var/lib/apt/lists/*
+
+# RUN echo "sendmail_path=sendmail -i -t" >> /usr/local/etc/php/conf.d/sendmail.ini
+
 RUN echo "security.limit_extensions = .html .php" >> /usr/local/etc/php-fpm.d/www.conf
+
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY ./php-overrides.ini $PHP_INI_DIR/conf.d/
-
-# RUN chown www-data /var/www/html/coms/papers
-# RUN chown www-data /var/www/html/coms/papers/*
 
 
