@@ -109,6 +109,7 @@ if( $confnum > 0 ) {
     $CURRENTCONTURL = $row['homepage'];
     $CURRENTCONTEMAIL = $row['email'];
     $CURRENTCONTSUBTITLE = "('$CURRENTCONTTITLE' is selected)";
+    $REVIEWDEADLINE = $row['review_deadline'];
   }
 	if( isset( $FILE_UPLOADED_LOG_EMAIL_PART[$CURRENTCONT] ) )
 		$FILE_UPLOADED_LOG_EMAIL = $FILE_UPLOADED_LOG_EMAIL_PART[$CURRENTCONT];
