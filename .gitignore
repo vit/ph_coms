@@ -10,6 +10,7 @@ app/coms/papers
 
 pg/init/01_create
 data/pg
+data/domainkeys
 
 
 .env

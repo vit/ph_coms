@@ -9,10 +9,10 @@ PAGEBODY;
 
 
 
-  $flag = $_REQUEST[flag];
+  $flag = $_REQUEST['flag'];
 //  $name = trim( $_REQUEST[name]);
-  $marked = &$_REQUEST[marked];
-  $userpin = $_REQUEST[userpin];
+  $marked = &$_REQUEST['marked'];
+  $userpin = $_REQUEST['userpin'];
 
   if ( $flag=="add" && $userpin ) {
     $result = @pg_query("INSERT INTO editor (context, userpin) VALUES ($CURRENTCONT, '$userpin')");
@@ -80,7 +80,7 @@ ORDER BY e.userpin;
 
   while( $row = pg_fetch_array($result) ) {
 //    $uname1 = htmlspecialchars($row[fname]." ".$row[lname]);
-    $uname1 = htmlspecialchars($row[name]);
+    $uname1 = htmlspecialchars($row['name']);
 
     $PAGEBODY .= <<<PAGEBODY
 <tr>

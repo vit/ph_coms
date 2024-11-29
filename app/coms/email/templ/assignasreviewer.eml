@@ -14,8 +14,6 @@ coauthored by {$PAPERAUTHORS}
 
 I believe the paper is within the field of your research interests.
 
-I would appreciate if you upload your brief review by April 20, 2024.
-
 I would appreciate if you upload your brief review by {$REVIEWDEADLINE}.
 
 Thank you so much in advance for your help in keeping high quality of the journal.
@@ -23,10 +21,10 @@ Thank you so much in advance for your help in keeping high quality of the journa
 The paper can be downloaded from your Reviewer's Virtual Office
 arranged for you at the {$CURRENTCONTSHORTTITLE} Submission site.
 Please enter the {$CURRENTCONTSHORTTITLE} Conference
-Management System (CoMS) at http://coms.physcon.ru
+Management System (CoMS) at http://coms.st.physcon.ru/
  with your PIN: {$PIN}
  and PASSWORD: '{$PASSWORD}'.
- Go to http://coms.physcon.ru/conf/1635/ and then click "Reviewer's office"
+ Go to http://coms.st.physcon.ru/conf/1646/ and then click "Reviewer's office"
   You will be able to download the paper and
   submit your evaluation results into appropriate boxes.
 

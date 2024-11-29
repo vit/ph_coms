@@ -36,6 +36,7 @@ services:
     networks:
       - phpfpm-coms
       - pg
+      - mail
 
   postgres:
     restart: always
@@ -53,11 +54,27 @@ services:
     networks:
       - pg
 
+  mail:
+    restart: always
+    container_name: ph_coms_mail_${ENV_NAME}
+    #image: catatnight/postfix:latest
+    image: my_postfix
+    expose:
+      - "25"
+    environment:
+      maildomain: st.physcon.ru
+      smtp_user: sender:love
+    volumes:
+      - ./data/domainkeys:/etc/opendkim/domainkeys
+    networks:
+      - mail
+
 networks:
   frontend:
     external: true 
     name: frontend 
   phpfpm-coms:
   pg:
+  mail:
 
  

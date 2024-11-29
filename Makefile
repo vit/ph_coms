@@ -4,6 +4,9 @@
 ##
 ##
 
+#export DOCKER_ENABLE_DEPRECATED_PULL_SCHEMA_1_IMAGE 1
+#DOCKER_ENABLE_DEPRECATED_PULL_SCHEMA_1_IMAGE=1
+
 -include .env_default
 -include .env
 export
@@ -30,7 +33,8 @@ stop: down
 
 
 build:
-	docker compose build postgres
+	docker compose build
+	#docker compose build postgres
 
 debug:	## Start docker compose with debug output
 	docker compose up

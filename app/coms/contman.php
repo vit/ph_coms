@@ -1,5 +1,9 @@
 <?
 
+
+// phpinfo();
+
+
 $PARTID = 'contman';
 
 include_once("start.php");

@@ -1,4 +1,9 @@
-<?
+<?php
+
+
+// echo "!!!!! in directmail.php !!!!!";
+// echo "!!!!! REVIEWDEADLINE=$REVIEWDEADLINE !!!!!";
+
 
 //include_once("../start.php");
 
