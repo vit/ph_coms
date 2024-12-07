@@ -14,11 +14,11 @@ PAGEBODY;
 
 
 
-$tasktitle = trim( $_REQUEST['tasktitle'] );
-$taskaction = $_REQUEST['taskaction'];
-$marked = $_REQUEST['marked'];
-$producerid = $_REQUEST['producerid'];
-$letterid = $_REQUEST['letterid'];
+$tasktitle = trim( isset($_REQUEST['tasktitle']) ? $_REQUEST['tasktitle'] : "" );
+$taskaction = isset($_REQUEST['taskaction']) ? $_REQUEST['taskaction'] : null;
+$marked = isset($_REQUEST['marked']) ? $_REQUEST['marked'] : null;
+$producerid = isset($_REQUEST['producerid']) ? $_REQUEST['producerid'] : null;
+$letterid = isset($_REQUEST['letterid']) ? $_REQUEST['letterid'] : null;
 
 
 //print "$mailtitle|$mlaction<br>";
@@ -73,7 +73,6 @@ WHERE t.context=$CURRENTCONT ORDER BY t.tid DESC
   <tr valign=top class=$cellclass>
   <td width=1 rowspan=2><input type=checkbox name="marked[]" value="$row[tid]"></td>
   <td width=1 rowspan=2 align=center>$row[tid]</td>
-  <!-- td><a href="po_editletter.html?mlid=$row[mlid]">$row[title]</a></td -->
   <td><a href="po_managetask.html?tid=$row[tid]">$row[title]</a></td>
   </tr>
   <tr valign=top class=$cellclass>
@@ -96,6 +95,7 @@ PAGEBODY;
 
 
 
+$selected = "";
 
 $prodlist = "<SELECT name=\"producerid\" size=1>\n";
 $result = pg_query("SELECT * FROM mlproducer ORDER BY prid");
