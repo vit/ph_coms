@@ -54,11 +54,14 @@ services:
     networks:
       - pg
 
-  mail:
+  postfix:
     restart: always
     container_name: ph_coms_mail_${ENV_NAME}
     #image: catatnight/postfix:latest
-    image: my_postfix
+    #image: my_postfix
+    build: 
+      context: ./postfix
+      dockerfile: Dockerfile
     expose:
       - "25"
     environment:
