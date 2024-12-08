@@ -1,0 +1,5 @@
+
+# */1 * * * * echo "This is a test" >> /var/log/cron/cron.log 2>&1
+
+* * * * * cd /var/www/html/email2/; /usr/local/bin/php sendmail.php >> /var/log/cron/cron.log 2>&1
+
