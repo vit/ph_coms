@@ -1,5 +1,5 @@
 
-web-coms/default.conf
+nginx/default.conf
 
 config.php
 app/coms/papers

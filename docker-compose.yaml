@@ -3,7 +3,7 @@ name: ph_coms_${ENV_NAME}
 
 services:
 
-  web-php-coms:
+  nginx:
     image: nginx:latest
     restart: always
     container_name: ph_coms_web_${ENV_NAME}
@@ -11,22 +11,22 @@ services:
       - "80"
     volumes:
       - ./app/coms:/var/www/html
-      - ./web-coms/default.conf:/etc/nginx/conf.d/default.conf
-      - ./web-coms/.htpasswd-coms:/etc/nginx/.htpasswd-coms
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/.htpasswd-coms:/etc/nginx/.htpasswd-coms
     environment:
       VIRTUAL_HOST:
         ${COMS_DOMAIN_NAME},
     networks:
       - frontend
-      - phpfpm-coms
+      - php
     links:
-      - php-fpm-coms
+      - php-fpm
 
-  php-fpm-coms:
+  php-fpm:
     restart: always
     container_name: ph_coms_php_${ENV_NAME}
     build: 
-      context: ./php-fpm-coms
+      context: ./php
       dockerfile: Dockerfile_PhpFpm
     expose:
       - "9000"
@@ -34,24 +34,24 @@ services:
       - ./app/coms:/var/www/html
     user: "www-data:www-data"
     networks:
-      - phpfpm-coms
+      - php
       - pg
-      - mail
+      - smtp
 
   php-cron:
     restart: always
     container_name: ph_cron_${ENV_NAME}
     build: 
-      context: ./php-fpm-coms
+      context: ./php
       dockerfile: Dockerfile_PhpCron
     volumes:
       - ./app/coms:/var/www/html
       - ./data/log/cron:/var/log/cron
     # user: "www-data:www-data"
     networks:
-      - phpfpm-coms
+      - php
       - pg
-      - mail
+      - smtp
 
   postgres:
     restart: always
@@ -85,14 +85,14 @@ services:
     volumes:
       - ./data/domainkeys:/etc/opendkim/domainkeys
     networks:
-      - mail
+      - smtp
 
 networks:
   frontend:
     external: true 
     name: frontend 
-  phpfpm-coms:
+  php:
   pg:
-  mail:
+  smtp:
 
  

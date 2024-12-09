@@ -52,8 +52,6 @@ Password:
 
 
 
-
-
 <?php function render_top_menu_block() { ?>
     <?php
         $IPACS_DOMAIN_NAME = $_SERVER["IPACS_DOMAIN_NAME"];

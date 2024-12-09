@@ -7,27 +7,31 @@ RUN apt-get install -y libpq-dev \
   && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
   && docker-php-ext-install pdo pdo_pgsql pgsql
 
-RUN apt-get install -y msmtp
-RUN apt-get install -y iputils-ping
+RUN apt-get install -y msmtp cron
+# RUN apt-get install -y iputils-ping
 
-RUN apt-get install -y cron
-
-
+# And clean up the image
 RUN rm -rf /var/lib/apt/lists/*
-
 
 # RUN echo "security.limit_extensions = .html .php" >> /usr/local/etc/php-fpm.d/www.conf
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-COPY ./php-overrides.ini $PHP_INI_DIR/conf.d/
-COPY ./msmtprc /etc/msmtprc
+COPY ./config/php-overrides.ini $PHP_INI_DIR/conf.d/
+COPY ./config/msmtprc /etc/msmtprc
 RUN chmod 666 /etc/msmtprc
 
+RUN touch /var/log/msmtp.log
+RUN chmod 666 /var/log/msmtp.log
+
+COPY ./config/crontab /crontab
+
+
+COPY ./.env /etc/environment
+# COPY ../.env /etc/environment
 
 
 
-COPY ./crontab /crontab
 
 RUN mkdir /var/log/cron
 RUN touch /var/log/cron/cron.log

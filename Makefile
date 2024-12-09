@@ -17,9 +17,13 @@ help:	## Show this help
 
 
 config:
-	cat web-coms/default-template.conf \
+	cat nginx/default-template.conf \
 		| envsubst '$$IPACS_DOMAIN_NAME $$COMS_DOMAIN_NAME $$CAP_DOMAIN_NAME $$LIB_DOMAIN_NAME $$CONF_DOMAIN_NAME $$ALBUM_DOMAIN_NAME' \
-		> web-coms/default.conf
+		> nginx/default.conf
+
+	cp .env ./php/.env
+	cd php && make config && cd ..
+
 	mkdir -p app/coms/papers
 	chmod 777 app/coms/papers
 	mkdir -p data/pg

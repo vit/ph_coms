@@ -2,6 +2,10 @@
 include_once("../start.php");
 include_once("mail_func.php");
 
+
+echo "in sendmail.php\n";
+
+
 $FROM0 = $GLOBALS['FROMEMAIL'];
 
 	$RETURN = $GLOBALS['RETURNEMAIL'];
