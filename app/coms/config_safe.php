@@ -21,7 +21,8 @@ $UP=""; // <-- Password Here
 //$ROOT = "/cms/";
 $ROOT = "/";
 
-$papersdir = "papers";
+// $papersdir = "papers";
+$papersdir = "/data/papers";
 
 
 $COMS_DOMAIN_NAME = $_SERVER["COMS_DOMAIN_NAME"];

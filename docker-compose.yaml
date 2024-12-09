@@ -32,6 +32,7 @@ services:
       - "9000"
     volumes:
       - ./app/coms:/var/www/html
+      - ./data/papers:/data/papers
     user: "www-data:www-data"
     networks:
       - php
@@ -46,6 +47,7 @@ services:
       dockerfile: Dockerfile_PhpCron
     volumes:
       - ./app/coms:/var/www/html
+      - ./data/papers:/data/papers
       - ./data/log/cron:/var/log/cron
     # user: "www-data:www-data"
     networks:
@@ -60,7 +62,8 @@ services:
       context: ./pg
       dockerfile: Dockerfile_Pg
     volumes:
-      - ./data/pg:/var/lib/postgresql/data
+      # - ./data/pg:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "root"
@@ -86,6 +89,10 @@ services:
       - ./data/domainkeys:/etc/opendkim/domainkeys
     networks:
       - smtp
+
+
+volumes:
+  pg-data:
 
 networks:
   frontend:

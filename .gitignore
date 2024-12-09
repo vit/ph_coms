@@ -12,7 +12,11 @@ pg/init/01_create
 data/pg
 data/domainkeys
 data/log
+data/papers
 
+backup
+
+trash
 
 .env
 

@@ -26,6 +26,8 @@ config:
 
 	mkdir -p app/coms/papers
 	chmod 777 app/coms/papers
+	mkdir -p data/papers
+	chmod 777 data/papers
 	mkdir -p data/pg
 	mkdir -p pg/init/01_create
 
@@ -33,6 +35,12 @@ run: up
 
 stop: down
 
+backup:
+	cd pg && make backup && cd ..
+
+
+rm_volumes:
+	docker volume rm ph_coms_$(ENV_NAME)_pg-data
 
 
 
