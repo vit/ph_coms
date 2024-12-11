@@ -9,12 +9,13 @@ app/coms/papers
 # pg_*.sql
 
 pg/init/01_create
-data/pg
+# data/pg
 data/domainkeys
-data/log
-data/papers
+# data/log
+# data/papers
 
 data/export
+data/import
 
 backup
 

@@ -33,9 +33,10 @@ services:
       - "9000"
     volumes:
       - ./app/coms:/var/www/html
-      - ./data/papers:/data/papers
+      # - ./data/papers:/data/papers
+      - coms-papers:/data/papers
       - backup:/data/backup
-    user: "www-data:www-data"
+    # user: "www-data:www-data"
     networks:
       - php
       - pg
@@ -49,7 +50,8 @@ services:
       dockerfile: Dockerfile_PhpCron
     volumes:
       - ./app/coms:/var/www/html
-      - ./data/papers:/data/papers
+      # - ./data/papers:/data/papers
+      - coms-papers:/data/papers
       # - ./data/log/cron:/var/log/cron
     # user: "www-data:www-data"
     networks:

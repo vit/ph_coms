@@ -4,15 +4,10 @@
 ##
 ##
 
-#export DOCKER_ENABLE_DEPRECATED_PULL_SCHEMA_1_IMAGE 1
-#DOCKER_ENABLE_DEPRECATED_PULL_SCHEMA_1_IMAGE=1
-
 -include .env_default
 -include .env
 export
 
-
-# export BACKUP_EXPORT_DIR=$(pwd)
 
 
 help:	## Show this help
@@ -21,7 +16,7 @@ help:	## Show this help
 
 config:
 
-	# echo "BACKUP_EXPORT_DIR=$(BACKUP_EXPORT_DIR)"
+	# echo "DATA_EXPORT_DIR=$(DATA_EXPORT_DIR)"
 
 	cp .env ./nginx/.env
 	cd nginx && make config && cd ..
@@ -46,13 +41,18 @@ backup:
 backup_export:
 	docker run -it \
 		-v ph_coms_$(ENV_NAME)_backup:/data/backup \
-		-v $(BACKUP_EXPORT_DIR):/data/export \
+		-v $(DATA_EXPORT_DIR):/data/export \
 		alpine \
 		/bin/sh -c 'if [ `ls /data/backup/* | wc -l` -gt 0 ]; then mv -n /data/backup/* /data/export/; fi'
+
+import_papers:
+	docker cp $(DATA_IMPORT_DIR)/papers/. ph_coms_php_$(ENV_NAME):/data/papers/
 
 
 # rm_volumes:
 # 	docker volume rm ph_coms_$(ENV_NAME)_pg-data
+
+
 
 
 build:
