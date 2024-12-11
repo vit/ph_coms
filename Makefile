@@ -21,7 +21,7 @@ help:	## Show this help
 
 config:
 
-	echo "BACKUP_EXPORT_DIR=$(BACKUP_EXPORT_DIR)"
+	# echo "BACKUP_EXPORT_DIR=$(BACKUP_EXPORT_DIR)"
 
 	cp .env ./nginx/.env
 	cd nginx && make config && cd ..
@@ -30,7 +30,7 @@ config:
 	cd php && make config && cd ..
 
 	# cp .env ./pg/.env
-	mkdir -p pg/init/01_create
+	cd pg && make config && cd ..
 
 	# cp .env ./postfix/.env
 
