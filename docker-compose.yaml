@@ -13,6 +13,7 @@ services:
       - ./app/coms:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/.htpasswd-coms:/etc/nginx/.htpasswd-coms
+      - backup:/data/backup
     environment:
       VIRTUAL_HOST:
         ${COMS_DOMAIN_NAME},
@@ -33,6 +34,7 @@ services:
     volumes:
       - ./app/coms:/var/www/html
       - ./data/papers:/data/papers
+      - backup:/data/backup
     user: "www-data:www-data"
     networks:
       - php
@@ -41,7 +43,7 @@ services:
 
   php-cron:
     restart: always
-    container_name: ph_cron_${ENV_NAME}
+    container_name: ph_coms_cron_${ENV_NAME}
     build: 
       context: ./php
       dockerfile: Dockerfile_PhpCron
@@ -62,8 +64,8 @@ services:
       context: ./pg
       dockerfile: Dockerfile_Pg
     volumes:
-      # - ./data/pg:/var/lib/postgresql/data
       - pg-data:/var/lib/postgresql/data
+      - backup:/data/backup
     environment:
       POSTGRES_USER: "root"
       POSTGRES_PASSWORD: "root"
@@ -83,16 +85,19 @@ services:
     expose:
       - "25"
     environment:
-      maildomain: st.physcon.ru
+      maildomain: ${IPACS_DOMAIN_NAME}
       smtp_user: sender:love
     volumes:
-      - ./data/domainkeys:/etc/opendkim/domainkeys
+      # - ./data/domainkeys:/etc/opendkim/domainkeys
+      - opendkim-domainkeys:/etc/opendkim/domainkeys
     networks:
       - smtp
 
 
 volumes:
   pg-data:
+  opendkim-domainkeys:
+  backup:
 
 networks:
   frontend:

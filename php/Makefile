@@ -4,8 +4,6 @@
 ##
 ##
 
-#export DOCKER_ENABLE_DEPRECATED_PULL_SCHEMA_1_IMAGE 1
-#DOCKER_ENABLE_DEPRECATED_PULL_SCHEMA_1_IMAGE=1
 
 # -include .env_default
 -include .env
@@ -23,6 +21,8 @@ config:
 		| envsubst '$$ENV_NAME $$IPACS_DOMAIN_NAME' \
 		> ./config/msmtprc
 
+backup:
+	docker exec -t --user root ph_coms_php_$(ENV_NAME) bash /backup-papers.sh
 
 
 

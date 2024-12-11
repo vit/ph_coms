@@ -11,7 +11,7 @@ auth login
 
 user sender
 password "love"
-from "vit@${IPACS_DOMAIN_NAME}"
+from "sender@${IPACS_DOMAIN_NAME}"
 logfile /var/log/msmtp.log
 
 

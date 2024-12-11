@@ -24,3 +24,6 @@ COPY ./config/msmtprc /etc/msmtprc
 RUN chmod 666 /etc/msmtprc
 
 
+COPY ./config/backup-papers.sh /backup-papers.sh
+
+

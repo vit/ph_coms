@@ -8,6 +8,7 @@ RUN localedef -i ru_RU -c -f CP1251 -A /usr/share/locale/locale.alias ru_RU.CP12
 COPY ./init/01_create/* /docker-entrypoint-initdb.d/
 COPY ./init/02_update/* /docker-entrypoint-initdb.d/
 
-# CMD ["postgres", "-c", "logging_collector=on", "-c", "log_directory=/logs", "-c", "log_filename=postgresql.log", "-c", "log_statement=all"]
+COPY ./config/backup-pg.sh /backup-pg.sh
+
 
 

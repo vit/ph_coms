@@ -1,3 +1,17 @@
+
+The code was taken from catatnight/postfix to build locally
+because docker refuses to download the prebuilt image due to
+its old format (or something like that)
+
+\/ \/ \/ \/ \/ \/ \/
+
+
+
+
+
+
+
+
 docker-postfix
 ==============
 

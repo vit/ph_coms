@@ -12,24 +12,28 @@
 export
 
 
+# export BACKUP_EXPORT_DIR=$(pwd)
+
+
 help:	## Show this help
 	@sed -ne '/@sed/!s/## //p' $(MAKEFILE_LIST)
 
 
 config:
-	cat nginx/default-template.conf \
-		| envsubst '$$IPACS_DOMAIN_NAME $$COMS_DOMAIN_NAME $$CAP_DOMAIN_NAME $$LIB_DOMAIN_NAME $$CONF_DOMAIN_NAME $$ALBUM_DOMAIN_NAME' \
-		> nginx/default.conf
+
+	echo "BACKUP_EXPORT_DIR=$(BACKUP_EXPORT_DIR)"
+
+	cp .env ./nginx/.env
+	cd nginx && make config && cd ..
 
 	cp .env ./php/.env
 	cd php && make config && cd ..
 
-	mkdir -p app/coms/papers
-	chmod 777 app/coms/papers
-	mkdir -p data/papers
-	chmod 777 data/papers
-	mkdir -p data/pg
+	# cp .env ./pg/.env
 	mkdir -p pg/init/01_create
+
+	# cp .env ./postfix/.env
+
 
 run: up
 
@@ -37,16 +41,22 @@ stop: down
 
 backup:
 	cd pg && make backup && cd ..
+	cd php && make backup && cd ..
+
+backup_export:
+	docker run -it \
+		-v ph_coms_$(ENV_NAME)_backup:/data/backup \
+		-v $(BACKUP_EXPORT_DIR):/data/export \
+		alpine \
+		/bin/sh -c 'if [ `ls /data/backup/* | wc -l` -gt 0 ]; then mv -n /data/backup/* /data/export/; fi'
 
 
-rm_volumes:
-	docker volume rm ph_coms_$(ENV_NAME)_pg-data
-
+# rm_volumes:
+# 	docker volume rm ph_coms_$(ENV_NAME)_pg-data
 
 
 build:
 	docker compose build
-	#docker compose build postgres
 
 debug:	## Start docker compose with debug output
 	docker compose up
@@ -60,7 +70,7 @@ down:	## Stop docker compose
 ps:	## List docker compose containers
 	docker compose ps
 
-c:
+c: ## Show compose file after environment variables interpolated
 	docker compose config
 
 

@@ -28,7 +28,6 @@ COPY ./config/crontab /crontab
 
 
 COPY ./.env /etc/environment
-# COPY ../.env /etc/environment
 
 
 
