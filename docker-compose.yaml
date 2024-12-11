@@ -50,7 +50,7 @@ services:
     volumes:
       - ./app/coms:/var/www/html
       - ./data/papers:/data/papers
-      - ./data/log/cron:/var/log/cron
+      # - ./data/log/cron:/var/log/cron
     # user: "www-data:www-data"
     networks:
       - php
@@ -96,6 +96,7 @@ services:
 
 volumes:
   pg-data:
+  coms-papers:
   opendkim-domainkeys:
   backup:
 
