@@ -72,6 +72,12 @@ fi
 #  opendkim
 #############
 
+
+mkdir -p /etc/opendkim/domainkeys
+cp /run/secrets/*.private /etc/opendkim/domainkeys/
+
+
+
 if [[ -z "$(find /etc/opendkim/domainkeys -iname *.private)" ]]; then
   exit 0
 fi
@@ -126,5 +132,7 @@ EOF
 cat >> /etc/opendkim/SigningTable <<EOF
 *@$maildomain mail._domainkey.$maildomain
 EOF
+
+
 chown opendkim:opendkim $(find /etc/opendkim/domainkeys -iname *.private)
 chmod 400 $(find /etc/opendkim/domainkeys -iname *.private)

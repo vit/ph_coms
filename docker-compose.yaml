@@ -4,16 +4,21 @@ name: ph_coms_${ENV_NAME}
 services:
 
   nginx:
-    image: nginx:latest
+    # image: nginx:latest
     restart: always
     container_name: ph_coms_web_${ENV_NAME}
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile_Nginx
     expose:
       - "80"
     volumes:
       - ./app/coms:/var/www/html
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/.htpasswd-coms:/etc/nginx/.htpasswd-coms
+      # - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      # - ./nginx/.htpasswd-coms:/etc/nginx/.htpasswd-coms
       - backup:/data/backup
+    secrets:
+      - htpasswd-coms
     environment:
       VIRTUAL_HOST:
         ${COMS_DOMAIN_NAME},
@@ -89,12 +94,19 @@ services:
     environment:
       maildomain: ${IPACS_DOMAIN_NAME}
       smtp_user: sender:love
-    volumes:
+    # volumes:
       # - ./data/domainkeys:/etc/opendkim/domainkeys
-      - opendkim-domainkeys:/etc/opendkim/domainkeys
+      # - opendkim-domainkeys:/etc/opendkim/domainkeys
+    secrets:
+      - mail.private
     networks:
       - smtp
 
+secrets:
+  mail.private:
+    file: .secrets/domainkeys/mail.private
+  htpasswd-coms:
+    file: .secrets/web/htpasswd-coms
 
 volumes:
   pg-data:
@@ -110,4 +122,4 @@ networks:
   pg:
   smtp:
 
- 
+
