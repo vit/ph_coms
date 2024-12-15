@@ -38,6 +38,9 @@ backup:
 	cd pg && make backup && cd ..
 	cd php && make backup && cd ..
 
+#	docker exec ph_coms_pg_stage bash -c 'pg_dumpall --exclude-database=root -U postgres | cat' > ./data/export/pg_dump_stage_`date +%Y-%m-%d"_"%H_%M_%S`.sql
+
+
 backup_export:
 	docker run -it \
 		-v ph_coms_$(ENV_NAME)_backup:/data/backup \
